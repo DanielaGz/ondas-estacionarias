@@ -1,0 +1,42 @@
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+
+@Component({
+  selector: 'app-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.css']
+})
+export class FormComponent implements OnInit {
+
+  material: string;
+  longitud_cuerda: number;
+  longitud_cuerda_unidades: string;
+  amplitud_onda: number;
+  amplitud_onda_unidades: string;
+  longitud_onda: number;
+  amplitud_longitud_onda: number;
+  num_armonicos: number;
+
+  constructor() {
+    this.material = "";
+    this.longitud_cuerda = 0;
+    this.longitud_cuerda_unidades  = "m";
+    this.amplitud_onda = 0;
+    this.amplitud_onda_unidades = "m";
+    this.amplitud_longitud_onda = 0;
+    this.longitud_onda = 0;
+    this.num_armonicos = 0;
+  }
+
+  ngOnInit(): void {
+  }
+
+  saveForm(form:NgForm){
+
+  }
+
+  unitConver(){
+
+  }
+
+}

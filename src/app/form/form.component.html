@@ -1,0 +1,64 @@
+<div class="card text-bg-light mb-3 col mt-5">
+  <div class="card-header text-center">
+    <h5 class="card-title">Formulario</h5>
+  </div>
+  <div class="card-body">
+    <p class="card-text">Ingrese los valores obtenidos de la simulación:</p>
+    <form #Form="ngForm" (ngSubmit)="saveForm(Form)">
+      <fieldset>
+        <div class="row row-cols-2">
+          <div class="mb-3 col">
+            <label for="material" class="form-label">Material de la cuerda</label>
+            <input type="text" id="material" name="material" class="form-control" required [(ngModel)]="material">
+          </div>
+          <div class="mb-3 col">
+            <div class="row">
+              <label for="longitud_cuerda" class="form-label">Longitud de la cuerda</label>
+              <div class="col-9">
+                <input type="number" id="longitud_cuerda" name="longitud_cuerda" class="form-control" required [(ngModel)]="longitud_cuerda">
+              </div>
+              <div class="col-3">
+                <select id="longitud_cuerda_unidades" name="longitud_cuerda_unidades" class="form-select" required [(ngModel)]="longitud_cuerda_unidades">
+                  <option>Seleccione las unidades</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 col">
+            <div class="row">
+              <label for="amplitud_onda" class="form-label">Amplitud de la onda</label>
+              <div class="col-9">
+                <input type="number" id="amplitud_onda" name="amplitud_onda" class="form-control" required [(ngModel)]="amplitud_onda">
+              </div>
+              <div class="col-3">
+                <select id="amplitud_onda_unidades" name="amplitud_onda_unidades" class="form-select" required [(ngModel)]="amplitud_onda_unidades">
+                  <option>Seleccione las unidades</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 col">
+            <div class="row">
+              <label for="longitud_onda" class="form-label">Amplitud de la onda</label>
+              <div class="col-9">
+                <input type="number" id="longitud_onda" name="longitud_onda" class="form-control" required [(ngModel)]="longitud_onda">
+              </div>
+              <div class="col-3">
+                <select id="amplitud_longitud_onda" name="amplitud_longitud_onda" class="form-select" required [(ngModel)]="amplitud_longitud_onda">
+                  <option>Seleccione las unidades</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3 col">
+            <label for="num_armonicos" class="form-label">Numero de armonicos</label>
+            <input type="number" id="num_armonicos" name="num_armonicos" class="form-control" required [(ngModel)]="num_armonicos">
+          </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
+          <button type="submit" class="btn btn-primary">Agregar</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
