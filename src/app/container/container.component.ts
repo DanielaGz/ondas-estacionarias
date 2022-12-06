@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OndasEstacionariasService } from '../ondas-estacionarias.service';
 
 @Component({
   selector: 'app-container',

@@ -9,4 +9,26 @@ export class OndasEstacionarias{
   ){
 
   }
+
+  getBodyChart(){
+    return {
+      legend: {
+        data: ['bar'],
+        align: 'left',
+      },
+      tooltip: {},
+      xAxis: {
+        data: [],
+        silent: false,
+        splitLine: {
+          show: false,
+        },
+      },
+      yAxis: {},
+      series: [],
+      animationEasing: 'elasticOut',
+      animationDelayUpdate: (idx) => idx * 5,
+    };
+  }
 }
+

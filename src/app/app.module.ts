@@ -9,6 +9,8 @@ import { ContainerComponent } from './container/container.component';
 import { FormComponent } from './form/form.component'
 import { FormsModule } from '@angular/forms';
 import { GraphicsComponent } from './graphics/graphics.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,11 @@ import { GraphicsComponent } from './graphics/graphics.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    }),
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

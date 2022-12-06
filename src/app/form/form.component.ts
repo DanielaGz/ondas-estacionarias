@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { OndasEstacionariasService } from '../ondas-estacionarias.service';
 
 @Component({
   selector: 'app-form',
@@ -17,7 +18,7 @@ export class FormComponent implements OnInit {
   amplitud_longitud_onda: number;
   num_armonicos: number;
 
-  constructor() {
+  constructor(private _ondasService : OndasEstacionariasService) {
     this.material = "";
     this.longitud_cuerda = 0;
     this.longitud_cuerda_unidades  = "m";
@@ -32,7 +33,7 @@ export class FormComponent implements OnInit {
   }
 
   saveForm(form:NgForm){
-
+    alert('ci')
   }
 
   unitConver(){

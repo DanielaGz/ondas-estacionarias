@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-graphics',
@@ -8,27 +9,31 @@ import { Component, OnInit } from '@angular/core';
 export class GraphicsComponent implements OnInit {
 
   options: any;
+
+  A = 6
+  w = 8* Math.PI
+  t = 0.004
+  k = 4 * Math.PI
+
+  xAxisData : any[] = [];
+  data1 : any[] = [];
+  data2 : any[] = [];
+
+  subscription: Subscription = interval(180).subscribe( t => this.ngOnInit());
+
   constructor() { }
 
   ngOnInit(): void {
-    const xAxisData : any[] = [];
-    const data1 : any[] = [];
-    const data2 : any[] = [];
-
-    for (let i = 0; i < 100; i++) {
-      xAxisData.push('category' + i);
-      data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
-      data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
-    }
-
+    this.xAxisData = []
+    this.data1 = []
     this.options = {
       legend: {
-        data: ['bar', 'bar2'],
+        data: ['bar'],
         align: 'left',
       },
       tooltip: {},
       xAxis: {
-        data: xAxisData,
+        data: this.xAxisData,
         silent: false,
         splitLine: {
           show: false,
@@ -39,19 +44,33 @@ export class GraphicsComponent implements OnInit {
         {
           name: 'bar',
           type: 'bar',
-          data: data1,
-          animationDelay: (idx) => idx * 10,
-        },
-        {
-          name: 'bar2',
-          type: 'bar',
-          data: data2,
-          animationDelay: (idx) => idx * 10 + 100,
-        },
+          data: this.data1,
+          seriesColor:"#5470c6",
+          animationDelay: 0.5,
+        }
       ],
-      animationEasing: 'elasticOut',
-      animationDelayUpdate: (idx) => idx * 5,
+      //animationEasing: 'elasticOut',
+      animationDelayUpdate: 0.5,
     };
+
+    this.setOptions();
+  }
+
+  changeTime(){
+    this.t = this.t + 0.002
+  }
+
+  setOptions(){
+    for (let i = 0; i < 1; i=(i+0.002)) {
+      this.xAxisData.push(i*Math.pow(10,5));
+      //Ecuacion A cos (wt - kx)
+      let num = (this.A*Math.sin((this.w*this.t)-(this.k*i))).toFixed(20)
+      let tam = num.split('.')[1].length
+      this.data1.push(Number(num)*Math.pow(10,Math.round(tam/3)));
+    }
+
+    this.options.series[0].data = this.data1
+    this.t = this.t + 0.002
   }
 
 }
