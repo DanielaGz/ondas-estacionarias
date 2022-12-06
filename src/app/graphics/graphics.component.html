@@ -1,8 +1,22 @@
 <div class="card text-bg-light mb-3 col mt-5">
   <div class="card-header text-center">
-    <h5 class="card-title">Formulario</h5>
+    <h5 class="card-title">Graficas</h5>
   </div>
   <div class="card-body">
-    <div echarts [options]="options" class="demo-chart"></div>
+    <div class="card m-3 p-2">
+      <div echarts [options]="standingWaveOptions" class="demo-chart"></div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="card m-3 p-2">
+          <div echarts [options]="incidentWaveOptions" class="demo-chart"></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card m-3 p-2">
+          <div echarts [options]="recidentWaveOptions" class="demo-chart"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -16,8 +16,10 @@ export class GraphicsComponent implements OnInit {
   k = 4 * Math.PI
 
   xAxisData : any[] = [];
-  data1 : any[] = [];
-  data2 : any[] = [];
+
+  incidentWaveOptions : any ;
+  recidentWaveOptions : any ;
+  standingWaveOptions : any ;
 
   subscription: Subscription = interval(180).subscribe( t => this.ngOnInit());
 
@@ -25,15 +27,22 @@ export class GraphicsComponent implements OnInit {
 
   ngOnInit(): void {
     this.xAxisData = []
-    this.data1 = []
-    this.options = {
+    this.incidentWaveOptions = this.getBodyChart(['incident'])
+    this.recidentWaveOptions = this.getBodyChart(['recident'])
+    this.standingWaveOptions = this.getBodyChart(['standing'])
+
+    this.setOptions();
+  }
+
+  getBodyChart(names?){
+    return {
       legend: {
-        data: ['bar'],
+        data: names,
         align: 'left',
       },
       tooltip: {},
       xAxis: {
-        data: this.xAxisData,
+        data: [],
         silent: false,
         splitLine: {
           show: false,
@@ -42,9 +51,9 @@ export class GraphicsComponent implements OnInit {
       yAxis: {},
       series: [
         {
-          name: 'bar',
+          name: names[0],
           type: 'bar',
-          data: this.data1,
+          data: [],
           seriesColor:"#5470c6",
           animationDelay: 0.5,
         }
@@ -52,8 +61,6 @@ export class GraphicsComponent implements OnInit {
       //animationEasing: 'elasticOut',
       animationDelayUpdate: 0.5,
     };
-
-    this.setOptions();
   }
 
   changeTime(){
@@ -61,16 +68,38 @@ export class GraphicsComponent implements OnInit {
   }
 
   setOptions(){
+    let incident : any[] = []
+    let recident : any[] = []
+    let standing : any[] = []
+
     for (let i = 0; i < 1; i=(i+0.002)) {
-      this.xAxisData.push(i*Math.pow(10,5));
-      //Ecuacion A cos (wt - kx)
-      let num = (this.A*Math.sin((this.w*this.t)-(this.k*i))).toFixed(20)
+      this.xAxisData.push(i.toFixed(3));
+      let num = this.getIncidentInfo(i)
       let tam = num.split('.')[1].length
-      this.data1.push(Number(num)*Math.pow(10,Math.round(tam/3)));
+      incident.push(Number(num)*Math.pow(10,Math.round(tam/3)));
+      recident.push(Number(this.getRecidentInfo(i))*Math.pow(10,Math.round(tam/3)));
+      standing.push(Number(this.getStandingInfo(i))*Math.pow(10,Math.round(tam/3)));
     }
 
-    this.options.series[0].data = this.data1
-    this.t = this.t + 0.002
+    this.incidentWaveOptions.xAxis.data = this.xAxisData
+    this.incidentWaveOptions.series[0].data = incident
+    this.recidentWaveOptions.series[0].data = recident
+    this.standingWaveOptions.series[0].data = standing
+    this.t = this.t + 0.01
+  }
+
+  getIncidentInfo(x){
+    //Ecuacion A cos (wt - kx)
+    return (this.A*Math.sin((this.w*this.t)-(this.k*x))).toFixed(20)
+  }
+
+  getRecidentInfo(x){
+    //Ecuacion A cos (wt - kx)
+    return (this.A*Math.sin((this.w*this.t)+(this.k*x))).toFixed(20)
+  }
+  getStandingInfo(x){
+    //Ecuacion 2A sen (kx) * cos (wt)
+    return (2*this.A*Math.sin(this.k*x)*Math.cos(this.w*this.t)).toFixed(20)
   }
 
 }
