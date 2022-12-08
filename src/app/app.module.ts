@@ -7,10 +7,14 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent} from './header/header.component';
 import { ContainerComponent } from './container/container.component';
 import { FormComponent } from './form/form.component'
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GraphicsComponent } from './graphics/graphics.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

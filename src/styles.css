@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .cabecero {
   height: 5vh;
   background-size: cover;
@@ -15,3 +19,6 @@
 .foot {
   background: linear-gradient(to left, #3b76a9, #195e19);
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
