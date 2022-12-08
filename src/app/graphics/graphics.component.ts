@@ -1,5 +1,6 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
+import { OndasEstacionariasService } from '../ondas-estacionarias.service';
 
 @Component({
   selector: 'app-graphics',
@@ -7,6 +8,8 @@ import { interval, Subscription } from 'rxjs';
   styleUrls: ['./graphics.component.css']
 })
 export class GraphicsComponent implements OnInit {
+
+  @Input() graphicData = '';
 
   options: any;
 
@@ -23,7 +26,7 @@ export class GraphicsComponent implements OnInit {
 
   subscription: Subscription = interval(180).subscribe( t => this.ngOnInit());
 
-  constructor() { }
+  constructor(private _ondasService : OndasEstacionariasService) { }
 
   ngOnInit(): void {
     this.xAxisData = []
@@ -58,7 +61,6 @@ export class GraphicsComponent implements OnInit {
           animationDelay: 0.5,
         }
       ],
-      //animationEasing: 'elasticOut',
       animationDelayUpdate: 0.5,
     };
   }

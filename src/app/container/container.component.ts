@@ -8,9 +8,15 @@ import { OndasEstacionariasService } from '../ondas-estacionarias.service';
 })
 export class ContainerComponent implements OnInit {
 
+  public graphicData:any = {};
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  changeGraphicData(event:any){
+    this.graphicData = event;
   }
 
 }
