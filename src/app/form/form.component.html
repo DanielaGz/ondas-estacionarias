@@ -1,112 +1,80 @@
-<div class="card text-bg-light mb-3 col mt-5">
+<div class="card text-bg-light mb-3 col m-1 mt-5">
   <div class="card-header text-center">
-    <h5 class="card-title">Formulario</h5>
+    <p class="m-1 fs-5 fw-bold">Formulario</p>
   </div>
   <div class="card-body">
     <p class="card-text">Ingrese los valores obtenidos de la simulación:</p>
     <form #Form="ngForm" (ngSubmit)="saveForm(Form)">
-      <table class="w-full">
-        <tr>
-          <td>
-              <mat-form-field class="">
-                <mat-label>Material de la cuerda</mat-label>
-                <input matInput name="material" [formControl]="material">
-                <mat-error *ngIf="material.hasError('required')">
-                  Este campo es <strong>requerido</strong>
-                </mat-error>
-              </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="">
-              <mat-label>Longitud de la cuerda</mat-label>
-              <input matInput [formControl]="longitud_cuerda">
-              <mat-error *ngIf="longitud_cuerda.hasError('required')">
-                Este campo es <strong>requerido</strong>
-              </mat-error>
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field>
-              <mat-label>Seleccione las unidades</mat-label>
-              <mat-select [formControl]="longitud_cuerda_unidades">
-                <mat-option>--</mat-option>
-                <mat-option value="1">m</mat-option>
-                <mat-option value="0">cm</mat-option>
-              </mat-select>
-              <mat-error *ngIf="longitud_cuerda_unidades.hasError('required')">
-                Este campo es <strong>requerido</strong>
-              </mat-error>
-            </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <mat-form-field class="">
+      <div class="row w-full">
+        <div class="col-4 w-full">
+          <mat-form-field class="w-full">
+            <mat-label>Material de la cuerda</mat-label>
+            <input matInput name="material" [formControl]="material">
+            <mat-error *ngIf="material.hasError('required')">
+              Este campo es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-4 w-full">
+          <mat-form-field class="w-full">
+            <mat-label>Peso del material en kg</mat-label>
+            <input matInput [formControl]="masa">
+            <mat-error *ngIf="num_armonicos.hasError('required')">
+              Este campo es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-4 w-full">
+          <mat-form-field class="w-full">
+            <mat-label>Numero de armonicos</mat-label>
+            <input matInput [formControl]="num_armonicos">
+            <mat-error *ngIf="num_armonicos.hasError('required')">
+              Este campo es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 d-flex w-full">
+          <mat-form-field class="w-full mr-3">
+            <mat-label>Longitud de la cuerda</mat-label>
+            <input matInput [formControl]="longitud_cuerda">
+            <mat-error *ngIf="longitud_cuerda.hasError('required')">
+              Este campo es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-full">
+            <mat-label>Seleccione las unidades</mat-label>
+            <mat-select [formControl]="longitud_cuerda_unidades">
+              <mat-option>--</mat-option>
+              <mat-option value="m">m</mat-option>
+              <mat-option value="cm">cm</mat-option>
+            </mat-select>
+            <mat-error *ngIf="longitud_cuerda_unidades.hasError('required')">
+              Este campo es <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 d-flex w-full">
+          <mat-form-field class="w-full mr-3">
               <mat-label>Amplitud de la onda</mat-label>
               <input matInput [formControl]="amplitud_onda">
               <mat-error *ngIf="amplitud_onda.hasError('required')">
                 Este campo es <strong>requerido</strong>
               </mat-error>
             </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field>
+            <mat-form-field class="w-full">
               <mat-label>Seleccione las unidades</mat-label>
               <mat-select [formControl]="amplitud_onda_unidades">
                 <mat-option>--</mat-option>
-                <mat-option value="1">m</mat-option>
-                <mat-option value="0">cm</mat-option>
+                <mat-option value="m">m</mat-option>
+                <mat-option value="cm">cm</mat-option>
               </mat-select>
               <mat-error *ngIf="amplitud_onda_unidades.hasError('required')">
                 Este campo es <strong>requerido</strong>
               </mat-error>
             </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="">
-              <mat-label>Longitud de la onda</mat-label>
-              <input matInput [formControl]="longitud_onda">
-              <mat-error *ngIf="longitud_onda.hasError('required')">
-                Este campo es <strong>requerido</strong>
-              </mat-error>
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field>
-              <mat-label>Seleccione las unidades</mat-label>
-              <mat-select [formControl]="longitud_onda_unidades">
-                <mat-option>--</mat-option>
-                <mat-option value="1">m</mat-option>
-                <mat-option value="0">cm</mat-option>
-              </mat-select>
-              <mat-error *ngIf="longitud_onda_unidades.hasError('required')">
-                Este campo es <strong>requerido</strong>
-              </mat-error>
-            </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <mat-form-field class="">
-              <mat-label>Numero de armonicos</mat-label>
-              <input matInput [formControl]="num_armonicos">
-              <mat-error *ngIf="num_armonicos.hasError('required')">
-                Este campo es <strong>requerido</strong>
-              </mat-error>
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="">
-              <mat-label>Peso del material en kg</mat-label>
-              <input matInput [formControl]="masa">
-              <mat-error *ngIf="num_armonicos.hasError('required')">
-                Este campo es <strong>requerido</strong>
-              </mat-error>
-            </mat-form-field>
-          </td>
-        </tr>
-      </table>
-      <button mat-raised-button color="primary" class="mt-3">Graficar</button>
+        </div>
+      </div>
+      <button mat-raised-button col m-1or="primary" class="mt-3">Graficar</button>
     </form>
   </div>
 </div>

@@ -23,6 +23,17 @@ export class GraphicsComponent implements OnInit, OnChanges {
   longitudOnda = 0;
   kVariable = 0;
   wVariable = 0;
+  colors_array = [
+    'rgb(52, 137, 84)',
+    'rgb(52, 105, 137)',
+    'rgb(58, 69, 122)',
+    'rgb(122, 88, 58)',
+    'rgb(34, 93, 139)',
+    'rgb(34, 139, 80)',
+    'rgb(139, 93, 34)',
+    'rgb(200, 131, 40)',
+  ];
+  color = this.colors_array[Math.floor(Math.random() * this.colors_array.length)]
 
   variables = {}
 
@@ -54,10 +65,9 @@ export class GraphicsComponent implements OnInit, OnChanges {
 
   generateChart(){
     this.xAxisData = []
-    this.incidentWaveOptions = this.getBodyChart(['incident'])
-    this.recidentWaveOptions = this.getBodyChart(['recident'])
-    this.standingWaveOptions = this.getBodyChart(['standing'])
-
+    this.incidentWaveOptions = this.getBodyChart(['INCIDENTE'])
+    this.recidentWaveOptions = this.getBodyChart(['REFLEJADA'])
+    this.standingWaveOptions = this.getBodyChart(['SUPERPUESTA'])
     this.setOptions();
   }
 
@@ -83,6 +93,9 @@ export class GraphicsComponent implements OnInit, OnChanges {
           data: [],
           seriesColor:"#5470c6",
           animationDelay: 0.5,
+          itemStyle:{
+            color: this.color
+          }
         }
       ],
       animationDelayUpdate: 0.5,
@@ -100,9 +113,7 @@ export class GraphicsComponent implements OnInit, OnChanges {
 
     for (let i = 0; i < this.graphicData['longitud_cuerda']; i=(i+0.002)) {
       this.xAxisData.push(i.toFixed(3));
-      let num = this.getIncidentInfo(i)
-      let tam = num.split('.')[1].length
-      incident.push(Number(num)*Math.pow(10,Math.round(tam/3)));
+      incident.push(Number(this.getIncidentInfo(i)));
       recident.push(Number(this.getRecidentInfo(i)));
       standing.push(Number(this.getStandingInfo(i)));
     }
@@ -166,7 +177,7 @@ export class GraphicsComponent implements OnInit, OnChanges {
   }
 
   getRecidentInfo(x){
-    //Ecuacion A cos (wt - kx)
+    //Ecuacion A cos (wt + kx)
     return (this.graphicData.amplitud_onda*Math.sin((this.variables['w']*this.t)+(this.variables['k']*x))).toFixed(20)
   }
   getStandingInfo(x){
