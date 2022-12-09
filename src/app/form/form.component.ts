@@ -33,20 +33,24 @@ export class FormComponent implements OnInit {
     ){}else{
       this.formDataEvent.emit({
         material: this.material.value,
-        longitud_cuerda: Number(this.longitud_cuerda.value),
+        longitud_cuerda: this.unitConvert(this.longitud_cuerda.value,this.longitud_cuerda_unidades.value),
         longitud_cuerda_unidades: this.longitud_cuerda_unidades.value,
-        amplitud_onda: Number(this.amplitud_onda.value),
+        amplitud_onda: this.unitConvert(this.amplitud_onda.value, this.amplitud_onda_unidades.value)/2,
         amplitud_onda_unidades: this.amplitud_onda_unidades.value,
-        longitud_onda: Number(this.longitud_onda.value),
-        longitud_onda_unidades: this.longitud_onda_unidades.value,
         num_armonicos: Number(this.num_armonicos.value),
         masa: Number(this.masa.value)
       });
     }
   }
 
-  unitConver(){
-
+  unitConvert(val, unit){
+    let value_number = Number(val)
+    switch(unit){
+      case 'cm':{
+        return value_number/100
+      }
+      default: return value_number;
+    }
   }
 
 }
