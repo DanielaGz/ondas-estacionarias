@@ -10,14 +10,15 @@ import { Output, EventEmitter } from '@angular/core';
 })
 export class FormComponent implements OnInit {
 
-  material = new FormControl('', [Validators.required]);
-  longitud_cuerda = new FormControl('', [Validators.required]);
+  material = new FormControl('.l.', [Validators.required]);
+  longitud_cuerda = new FormControl('1', [Validators.required]);
   longitud_cuerda_unidades = new FormControl('m', [Validators.required]);
-  amplitud_onda = new FormControl('', [Validators.required]);
+  amplitud_onda = new FormControl('0.03', [Validators.required]);
   amplitud_onda_unidades = new FormControl('m', [Validators.required]);
-  longitud_onda = new FormControl('', [Validators.required]);
+  longitud_onda = new FormControl('0.06', [Validators.required]);
   longitud_onda_unidades = new FormControl(0, [Validators.required]);
-  num_armonicos = new FormControl('', [Validators.required]);
+  num_armonicos = new FormControl('3', [Validators.required]);
+  masa = new FormControl('0.001', [Validators.required]);
 
   @Output() formDataEvent = new EventEmitter<any>();
 
@@ -32,13 +33,14 @@ export class FormComponent implements OnInit {
     ){}else{
       this.formDataEvent.emit({
         material: this.material.value,
-        longitud_cierda: this.longitud_cuerda.value,
+        longitud_cuerda: Number(this.longitud_cuerda.value),
         longitud_cuerda_unidades: this.longitud_cuerda_unidades.value,
-        amplitud_onda: this.amplitud_onda.value,
+        amplitud_onda: Number(this.amplitud_onda.value),
         amplitud_onda_unidades: this.amplitud_onda_unidades.value,
-        longitud_onda: this.longitud_onda.value,
+        longitud_onda: Number(this.longitud_onda.value),
         longitud_onda_unidades: this.longitud_onda_unidades.value,
-        num_armonicos: this.num_armonicos.value
+        num_armonicos: Number(this.num_armonicos.value),
+        masa: Number(this.masa.value)
       });
     }
   }

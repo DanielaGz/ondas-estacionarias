@@ -95,6 +95,15 @@
               </mat-error>
             </mat-form-field>
           </td>
+          <td>
+            <mat-form-field class="">
+              <mat-label>Peso del material en kg</mat-label>
+              <input matInput [formControl]="masa">
+              <mat-error *ngIf="num_armonicos.hasError('required')">
+                Este campo es <strong>requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
         </tr>
       </table>
       <button mat-raised-button color="primary" class="mt-3">Graficar</button>
