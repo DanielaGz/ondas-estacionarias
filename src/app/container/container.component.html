@@ -1,4 +1,5 @@
 <div class="min-vh-100 container">
   <app-form (formDataEvent)="changeGraphicData($event)"></app-form>
-  <app-graphics *ngFor="let eachGraphic of graphicsData" [graphicData]="eachGraphic"></app-graphics>
+  <app-graphics *ngFor="let eachGraphic of graphicsData" [graphicData]="eachGraphic" (closeGraphicEvent)="closeGraphic($event)">
+  </app-graphics>
 </div>

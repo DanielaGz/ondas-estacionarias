@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { OndasEstacionariasService } from '../ondas-estacionarias.service';
 
@@ -8,7 +8,8 @@ import { OndasEstacionariasService } from '../ondas-estacionarias.service';
   styleUrls: ['./graphics.component.css']
 })
 export class GraphicsComponent implements OnInit, OnChanges {
-
+  
+  @Output() closeGraphicEvent = new EventEmitter<any>();
   @Input() graphicData = {
     amplitud_onda: 6,
     amplitud_onda_unidades: "1",
@@ -49,7 +50,6 @@ export class GraphicsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges){
-    console.log(this.graphicData);
   }
 
   generateChart(){
@@ -83,6 +83,9 @@ export class GraphicsComponent implements OnInit, OnChanges {
           data: [],
           seriesColor:"#5470c6",
           animationDelay: 0.5,
+          itemStyle: {
+            color: 'rgb(255, 0, 0)'
+          },
         }
       ],
       animationDelayUpdate: 0.5,
@@ -100,9 +103,7 @@ export class GraphicsComponent implements OnInit, OnChanges {
 
     for (let i = 0; i < this.graphicData['longitud_cuerda']; i=(i+0.002)) {
       this.xAxisData.push(i.toFixed(3));
-      let num = this.getIncidentInfo(i)
-      let tam = num.split('.')[1].length
-      incident.push(Number(num)*Math.pow(10,Math.round(tam/3)));
+      incident.push(Number(this.getIncidentInfo(i)));
       recident.push(Number(this.getRecidentInfo(i)));
       standing.push(Number(this.getStandingInfo(i)));
     }
@@ -134,7 +135,6 @@ export class GraphicsComponent implements OnInit, OnChanges {
         ).catch();
       }
     ).catch();
-    console.log(this.variables)
   }
 
   getk(){
@@ -174,4 +174,7 @@ export class GraphicsComponent implements OnInit, OnChanges {
     return (2*this.graphicData.amplitud_onda*Math.sin(this.variables['k']*x)*Math.sin(this.variables['w']*this.t)).toFixed(20)
   }
 
+  closeGraphic(event){
+    this.closeGraphicEvent.emit(this.graphicData);
+  }
 }

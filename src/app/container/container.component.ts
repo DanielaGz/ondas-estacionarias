@@ -18,4 +18,9 @@ export class ContainerComponent implements OnInit {
     this.graphicsData.push(event);
   }
 
+  closeGraphic(event){
+    let indexOfElement = this.graphicsData.indexOf(event);
+    this.graphicsData.splice(indexOfElement, 1);
+  }
+
 }
