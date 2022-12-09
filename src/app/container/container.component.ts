@@ -7,8 +7,7 @@ import { OndasEstacionariasService } from '../ondas-estacionarias.service';
   styleUrls: ['./container.component.css']
 })
 export class ContainerComponent implements OnInit {
-
-  public graphicData:any = {};
+  public graphicsData:any[] = [];
 
   constructor() { }
 
@@ -16,7 +15,7 @@ export class ContainerComponent implements OnInit {
   }
 
   changeGraphicData(event:any){
-    this.graphicData = event;
+    this.graphicsData.push(event);
   }
 
 }
