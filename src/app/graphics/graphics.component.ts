@@ -166,7 +166,7 @@ export class GraphicsComponent implements OnInit, OnChanges {
   }
 
   getRecidentInfo(x){
-    //Ecuacion A cos (wt - kx)
+    //Ecuacion A cos (wt + kx)
     return (this.graphicData.amplitud_onda*Math.sin((this.variables['w']*this.t)+(this.variables['k']*x))).toFixed(20)
   }
   getStandingInfo(x){
