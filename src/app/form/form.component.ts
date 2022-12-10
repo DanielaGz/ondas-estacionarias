@@ -10,15 +10,13 @@ import { Output, EventEmitter } from '@angular/core';
 })
 export class FormComponent implements OnInit {
 
-  material = new FormControl('.l.', [Validators.required]);
-  longitud_cuerda = new FormControl('1', [Validators.required]);
+  material = new FormControl('', [Validators.required]);
+  longitud_cuerda = new FormControl('', [Validators.required]);
   longitud_cuerda_unidades = new FormControl('m', [Validators.required]);
-  amplitud_onda = new FormControl('0.03', [Validators.required]);
+  amplitud_onda = new FormControl('', [Validators.required]);
   amplitud_onda_unidades = new FormControl('m', [Validators.required]);
-  longitud_onda = new FormControl('0.06', [Validators.required]);
-  longitud_onda_unidades = new FormControl(0, [Validators.required]);
-  num_armonicos = new FormControl('3', [Validators.required]);
-  masa = new FormControl('0.001', [Validators.required]);
+  num_armonicos = new FormControl('', [Validators.required]);
+  masa = new FormControl('', [Validators.required]);
 
   @Output() formDataEvent = new EventEmitter<any>();
 
@@ -29,7 +27,7 @@ export class FormComponent implements OnInit {
 
   saveForm(form:NgForm){
     if(
-      this.material.hasError("required") || this.longitud_cuerda.hasError("required") || this.longitud_cuerda_unidades.hasError("required") || this.amplitud_onda.hasError("required") || this.amplitud_onda_unidades.hasError("required") || this.longitud_onda.hasError("required") || this.longitud_onda_unidades.hasError("required") || this.num_armonicos.hasError("required")
+      this.material.hasError("required") || this.longitud_cuerda.hasError("required") || this.longitud_cuerda_unidades.hasError("required") || this.amplitud_onda.hasError("required") || this.amplitud_onda_unidades.hasError("required") || this.num_armonicos.hasError("required")
     ){}else{
       this.formDataEvent.emit({
         material: this.material.value,
